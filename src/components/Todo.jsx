@@ -40,9 +40,6 @@ const Todo = ({ title, id, removeTodo, saveEditing }) => {
 
 	const toggleChecked = () => {
 		setIsChecked(prev => !prev)
-		setTimeout(() => {
-			removeTodo(id)
-		}, 1000)
 	}
 
 	useEffect(() => {
