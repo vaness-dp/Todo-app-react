@@ -1,39 +1,11 @@
 /* eslint-disable no-mixed-spaces-and-tabs */
-import React, { useState } from 'react'
+import React from 'react'
 import Todo from './components/Todo.jsx'
 import TodoForm from './components/TodoForm.jsx'
+import useTodoList from './components/hooks/useTodoList.jsx'
 
 const App = () => {
-	const [tasks, setTasks] = useState([])
-
-	const addTodo = title => {
-		if (title.trim() !== '') {
-			setTasks([
-				{
-					id: new Date(),
-					title: title.trim(),
-				},
-				...tasks,
-			])
-		}
-	}
-
-	const removeTodo = id => {
-		setTasks(tasks.filter(task => task.id !== id))
-	}
-
-	const saveEditing = (id, value) => {
-		setTasks(
-			tasks.map(task =>
-				task.id === id
-					? {
-							...task,
-							title: value,
-					  }
-					: task
-			)
-		)
-	}
+	const { tasks, addTodo, removeTodo, saveEditing } = useTodoList()
 
 	return (
 		<div className='app'>

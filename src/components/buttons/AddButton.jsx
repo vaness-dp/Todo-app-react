@@ -1,5 +1,5 @@
 import { Plus } from 'lucide-react'
-const AddBtn = ({ onClick }) => {
+const AddButton = ({ onClick }) => {
 	return (
 		<button
 			aria-label='Add todo'
@@ -12,4 +12,4 @@ const AddBtn = ({ onClick }) => {
 	)
 }
 
-export default AddBtn
+export default AddButton

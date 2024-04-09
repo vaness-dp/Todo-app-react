@@ -1,52 +1,24 @@
 /* eslint-disable react/prop-types */
 import cn from 'classnames'
-import { useEffect, useRef, useState } from 'react'
+import useTodoItem from './hooks/useTodoItem'
 import EditButton from './buttons/EditButton'
 import RemoveBtn from './buttons/RemoveButton'
 import SaveButton from './buttons/SaveButton'
 
 const Todo = ({ title, id, removeTodo, saveEditing }) => {
-	const [isChecked, setIsChecked] = useState(false)
-	const [isEditing, setIsEditing] = useState(false)
-	const [value, setValue] = useState(title)
-	const editTitleInputRef = useRef(null)
-
-	const handleSave = () => {
-		saveEditing(id, value)
-		setIsEditing(false)
-	}
-
-	const handleChange = e => {
-		setValue(e.target.value)
-	}
-
-	const handleBlur = () => {
-		if (value.trim() === '') {
-			removeTodo(id)
-		}
-	}
-
-	const handleKeyDown = e => {
-		if (e.key === 'Enter') {
-			toggleChecked()
-		}
-	}
-
-	const handleSaveKeyDown = e => {
-		if (e.key === 'Enter') {
-			handleSave()
-		}
-	}
-
-	const toggleChecked = () => {
-		setIsChecked(prev => !prev)
-	}
-
-	useEffect(() => {
-		if (isEditing && editTitleInputRef.current) {
-			editTitleInputRef.current.focus()
-		}
-	}, [isEditing])
+	const {
+		isChecked,
+		isEditing,
+		value,
+		editTitleInputRef,
+		toggleChecked,
+		handleChange,
+		handleBlur,
+		handleKeyDown,
+		handleSaveKeyDown,
+		setIsEditing,
+		handleSave,
+	} = useTodoItem({ id, title, removeTodo, saveEditing })
 
 	return (
 		<div className='todo-wrapper'>

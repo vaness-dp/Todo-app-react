@@ -1,23 +1,9 @@
-import { useEffect, useRef, useState } from 'react'
+import useTodoForm from './hooks/useTodoForm'
 import AddButton from './buttons/AddButton'
 // eslint-disable-next-line react/prop-types
 const TodoForm = ({ addTodo }) => {
-	const [inputValue, setInputValue] = useState('')
-	const inputRef = useRef(null)
-
-	useEffect(() => {
-		inputRef.current.focus()
-	}, [])
-
-	const handleSubmit = e => {
-		e.preventDefault()
-		addTodo(inputValue)
-		setInputValue('')
-	}
-
-	const handleChange = e => {
-		setInputValue(e.target.value)
-	}
+	const { inputValue, inputRef, handleSubmit, handleChange } =
+		useTodoForm(addTodo)
 
 	return (
 		<form className='flex justify-between mb-8' onSubmit={handleSubmit}>
